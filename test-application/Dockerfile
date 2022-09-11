@@ -4,7 +4,7 @@ WORKDIR /anewproj/test-application
 
 COPY  package*.json ./
 
-RUN npm ci
+RUN npm install
 
 COPY . .
 ENTRYPOINT [ "./index.js" ]
