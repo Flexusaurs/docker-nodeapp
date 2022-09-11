@@ -4,7 +4,7 @@ import Express from 'express';
 const app = Express()
 const appId = process.env.APPID
 console.log(appId)
-console.log("hey i'm a secret!")
+//console.log("hey i'm a secret!")
 
 
 //grabbing local ip by specifying interface, family
