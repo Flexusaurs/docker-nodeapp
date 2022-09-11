@@ -39,8 +39,8 @@ jobs:
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         ECR_REPOSITORY: itayshowips
-      run: docker build . --file Dockerfile --tag $ECR_REGISTRY/showIps:showIps-${{ steps.vars.outputs.branch }}-${{ steps.vars.outputs.sha_short }}, $ECR_REGISTRY/showIps:latest
-           docker push --tag $ECR_REGISTRY/showIps:showIps-${{ steps.vars.outputs.branch }}-${{ steps.vars.outputs.sha_short }}, $ECR_REGISTRY/showIps:latest
+      run: docker build . --file Dockerfile --tag itayshowips/showIps:showIps-${{ steps.vars.outputs.branch }}-${{ steps.vars.outputs.sha_short }}, $ECR_REGISTRY/showIps:latest
+           docker push --tag itayshowips/showIps:showIps-${{ steps.vars.outputs.branch }}-${{ steps.vars.outputs.sha_short }}, $ECR_REGISTRY/showIps:latest
     
       
 
