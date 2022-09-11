@@ -44,8 +44,8 @@ jobs:
         context: ./test-application/
         push: true
         tags: | 
-          itayshowips/docker-nodeapp:showips_${{ steps.vars.outputs.branch }}_${{ steps.vars.outputs.sha_short }}
-          itayshowips/docker-nodeapp:latest
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }/itayshowips/docker-nodeapp:showips_${{ steps.vars.outputs.branch }}_${{ steps.vars.outputs.sha_short }}
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }/itayshowips/docker-nodeapp:latest
 
     
       
