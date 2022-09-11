@@ -1,0 +1,45 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "master" ]
+
+
+
+jobs:
+  
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: login to aws
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-east-1
+      
+    - name: Login to Amazon ECR
+      id: login-ecr
+      uses: aws-actions/amazon-ecr-login@v1
+    
+    - name: get vars
+      id: vars
+      shell: bash
+      run: |
+        echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+        echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+      
+    - name: grab ECR details
+      env:
+        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }
+        ECR_REPOSITORY: itayshowips
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag $ECR_REGISTRY/showIps:showIps-${{ steps.vars.outputs.branch }}-${{ steps.vars.outputs.sha_short }}, $ECR_REGISTRY/showIps:latest
+           docker push --tag $ECR_REGISTRY/showIps:showIps-${{ steps.vars.outputs.branch }}-${{ steps.vars.outputs.sha_short }}, $ECR_REGISTRY/showIps:latest
+    
+      
+
