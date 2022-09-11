@@ -4,7 +4,7 @@ WORKDIR /anewproj/test-application
 
 COPY  package*.json ./
 
-RUN yarn
+RUN npm ci
 
 COPY . .
 ENTRYPOINT [ "./index.js" ]
