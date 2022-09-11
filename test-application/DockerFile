@@ -1,6 +1,6 @@
 FROM node:16
 
-WORKDIR /anewproj/test-application
+WORKDIR .
 
 COPY  package*.json ./
 
